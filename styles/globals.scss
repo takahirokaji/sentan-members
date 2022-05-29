@@ -1,0 +1,27 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body,
+input,
+textarea {
+  font-family: "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "メイリオ",
+    "Meiryo", "verdana", sans-serif;
+  color: #4e4e4e;
+}
+
+h1,
+p {
+  margin: 0;
+}
