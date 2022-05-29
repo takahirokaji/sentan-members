@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import Image from "next/image";
 
-const MembersList = () => {
+const MembersList = ({ list }) => {
+  console.log(list);
   const List = styled.div`
     overflow-x: scroll;
     display: flex;
@@ -10,6 +11,7 @@ const MembersList = () => {
     column-gap: 60px;
   `;
   const Member = styled.div`
+    border: 1px solid rgb(240, 240, 240, 0.6);
     flex-basis: 20%;
     flex-shrink: 0;
     width: 250px;
@@ -49,16 +51,11 @@ const MembersList = () => {
   const LinkButton = styled.button`
     width: 100%;
     height: 45px;
-    font-family: "Roboto", sans-serif;
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 2.5px;
-    font-weight: 500;
     color: #000;
     background-color: #fff;
     border: 0.5px solid #4e4e4e;
     border-radius: 45px;
-    /* box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1); */
+    position: relative;
     transition: all 0.3s ease 0s;
     cursor: pointer;
     outline: none;
@@ -73,6 +70,14 @@ const MembersList = () => {
       box-shadow: 0px 10px 10px rgba(46, 229, 157, 0.2);
       color: #fff;
       transform: translateY(-4px);
+    }
+
+    a {
+      display: block;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 2.5px;
+      font-weight: 500;
     }
   `;
   const LinkButtonWrap = styled.div`
@@ -92,31 +97,33 @@ const MembersList = () => {
 
   return (
     <List>
-      <Member>
-        <Spacer />
-        <MemberInformationContainer>
-          <Avater>
-            <Image
-              src={"https://source.unsplash.com/1000x1000"}
-              width={140}
-              height={140}
-            ></Image>
-          </Avater>
-          <Name>梶貴広</Name>
-          <p>総合科学技術研究科</p>
-        </MemberInformationContainer>
-        <Spacer />
-        <LinkButtonWrap>
-          <a
-            target="_blank"
-            href="https://my-portfolio-takahirokaji.vercel.app/history"
-            rel="noopener noreferrer"
-          >
-            <LinkButton>go to mypage</LinkButton>
-          </a>
-        </LinkButtonWrap>
-        <Spacer />
-      </Member>
+      {list.map((data) => {
+        return (
+          <Member>
+            <Spacer />
+            <MemberInformationContainer>
+              <Avater>
+                <Image src={data.iconURL} width={140} height={140}></Image>
+              </Avater>
+              <Name>{data.name}</Name>
+              <p>{data.belongTo}</p>
+            </MemberInformationContainer>
+            <Spacer />
+            <LinkButtonWrap>
+              <LinkButton>
+                <a
+                  target="_blank"
+                  href={data.portfolioURL}
+                  rel="noopener noreferrer"
+                >
+                  click here
+                </a>
+              </LinkButton>
+            </LinkButtonWrap>
+            <Spacer />
+          </Member>
+        );
+      })}
     </List>
   );
 };
