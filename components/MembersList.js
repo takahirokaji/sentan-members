@@ -99,7 +99,7 @@ const MembersList = ({ list }) => {
     <List>
       {list.map((data) => {
         return (
-          <Member>
+          <Member key={data.id}>
             <Spacer />
             <MemberInformationContainer>
               <Avater>

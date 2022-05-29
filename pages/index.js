@@ -7,7 +7,6 @@ import MembersList from "../components/MembersList";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../Firebase/firebase";
 export default function Home(props) {
-  console.log(props.members);
   const AppContainer = styled.div`
     height: 100vh;
     overflow-y: scroll;
@@ -137,6 +136,7 @@ export const getServerSideProps = async () => {
   querySnapshot.forEach((doc) => {
     const data = doc.data();
     const member = {
+      id: doc.id,
       name: data.name,
       iconURL: data.iconURL,
       grade: data.grade,
