@@ -7,8 +7,8 @@ import ModalWindow from "./ModalWindow";
 
 const Header = () => {
   const [isShow, setIsShow] = useState(false);
-  const [modalwindowIsShown, setModalwindowIsShown] = useState(false);
-  const [showModal, setShowModal] = useState(false);
+  // const [modalwindowIsShown, setModalwindowIsShown] = useState(false);
+  // const [showModal, setShowModal] = useState(false);
 
   return (
     <StyledHeader>
@@ -18,7 +18,7 @@ const Header = () => {
           <li className="selected">Members</li>
         </PageList>
       </Spacer>
-      <ModalWindow isShow={isShow} isShowCloseButton={false}></ModalWindow>
+      <ModalWindow isShow={isShow}></ModalWindow>
       <AddMemberButton onClick={() => setIsShow(true)}>
         ＋ メンバー追加
       </AddMemberButton>

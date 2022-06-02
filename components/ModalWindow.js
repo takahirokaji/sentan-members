@@ -5,7 +5,7 @@ import { collection, addDoc, Timestamp } from "firebase/firestore";
 import { storage, db } from "../Firebase/firebase";
 import Image from "next/image";
 
-const ModalWindow = ({ className, isShow, isShowCloseButton }) => {
+const ModalWindow = ({ className, isShow }) => {
   const grade = ["M2", "M1", "B4", "B3", "B2", "B1"];
   const belongTo = [
     "行動情報学科",
@@ -45,7 +45,7 @@ const ModalWindow = ({ className, isShow, isShowCloseButton }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    addMemberToFirebase.then(() => {
+    addMemberToFirebase().then(() => {
       setIsClose(true);
     });
   };
@@ -53,10 +53,10 @@ const ModalWindow = ({ className, isShow, isShowCloseButton }) => {
   const addMemberToFirebase = async () => {
     await addDoc(collection(db, "sentan-2022-early"), {
       name: state.name,
-      iconURL: "https://source.unsplash.com/1000x1000",
+      iconURL: state.iconURL,
       grade: state.grade,
       belongTo: state.belongTo,
-      portfolioURL: "https://www.google.com/?hl=ja",
+      portfolioURL: state.portfolioURL,
       createdAt: Timestamp.now(),
     });
   };
