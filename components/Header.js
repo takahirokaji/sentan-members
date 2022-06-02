@@ -5,6 +5,38 @@ import styled from "styled-components";
 import { useState } from "react";
 import ModalWindow from "./ModalWindow";
 
+const Header = () => {
+  const [isShow, setIsShow] = useState(false);
+  const [modalwindowIsShown, setModalwindowIsShown] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+
+  return (
+    <StyledHeader>
+      <Image src={Logo} alt="app_logo" width={250} height={100}></Image>
+      <Spacer>
+        <PageList>
+          <li className="selected">Members</li>
+        </PageList>
+      </Spacer>
+      <ModalWindow isShow={isShow} isShowCloseButton={false}></ModalWindow>
+      <AddMemberButton onClick={() => setIsShow(true)}>
+        ＋ メンバー追加
+      </AddMemberButton>
+    </StyledHeader>
+  );
+};
+
+const StyledHeader = styled.div`
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  width: 100vw;
+`;
+
+const Spacer = styled.div`
+  flex: 1;
+`;
+
 const PageList = styled.ul`
   display: flex;
   li {
@@ -37,55 +69,4 @@ const AddMemberButton = styled.button`
     transform: translateY(-4px);
   }
 `;
-
-const Header = () => {
-  const Header = styled.div`
-    display: flex;
-    align-items: center;
-    padding: 0 16px;
-    width: 100vw;
-  `;
-
-  const Spacer = styled.div`
-    flex: 1;
-  `;
-
-  const [isShow, setIsShow] = useState(false);
-  const [modalwindowIsShown, setModalwindowIsShown] = useState(false);
-  const [showModal, setShowModal] = useState(false);
-
-  // const [isShow, setIsShow] = useState(true);
-  // const handleClick = useCallback(() => setIsShow(false), []);
-
-  // const cancelScroll = (e) => {
-  //   e.preventDefault();
-  //   console.log("hello");
-  //   setModalwindowIsShown(!modalwindowIsShown);
-  // };
-  // const handleRender = () => {
-  //   alert("rendered");
-  //   document
-  //     .getElementById("ModalWrapper")
-  //     .addEventListener("mousewheel", scroll_control, { passive: false });
-  //   document
-  //     .getElementById("ModalWrapper")
-  //     .addEventListener("touchmove", scroll_control, { passive: false });
-  // };
-
-  return (
-    <Header>
-      <Image src={Logo} alt="app_logo" width={250} height={100}></Image>
-      <Spacer>
-        <PageList>
-          <li className="selected">Members</li>
-        </PageList>
-      </Spacer>
-      <ModalWindow isShow={isShow} isShowCloseButton={false}></ModalWindow>
-      <AddMemberButton onClick={() => setIsShow(true)}>
-        ＋ メンバー追加
-      </AddMemberButton>
-    </Header>
-  );
-};
-
 export default Header;

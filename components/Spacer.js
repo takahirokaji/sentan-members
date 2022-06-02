@@ -4,7 +4,7 @@ const Spacer = () => {
   const Spacer = styled.div`
     flex: 1;
   `;
-  return <Spacer></Spacer>;
+  return <Spacer />;
 };
 
 export default Spacer;
