@@ -5,7 +5,7 @@ import { collection, addDoc, Timestamp } from "firebase/firestore";
 import { storage, db } from "../Firebase/firebase";
 import Image from "next/image";
 
-const ModalWindow = ({ className, isShow }) => {
+const ModalWindow = ({ className, isShow, isClose, setIsClose, setIsShow }) => {
   const grade = ["M2", "M1", "B4", "B3", "B2", "B1"];
   const belongTo = [
     "行動情報学科",
@@ -13,7 +13,8 @@ const ModalWindow = ({ className, isShow }) => {
     "情報科学科",
     "総合科学技術研究科",
   ];
-  const [isClose, setIsClose] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(false);
+  // const [isClose, setIsClose] = useState(false);
   const [state, setState] = useState({
     name: "",
     iconURL: "",
@@ -43,10 +44,20 @@ const ModalWindow = ({ className, isShow }) => {
   };
 
   const handleSubmit = async (event) => {
+    setIsDisabled(true);
     event.preventDefault();
 
     addMemberToFirebase().then(() => {
-      setIsClose(true);
+      setState({
+        name: "",
+        iconURL: "",
+        grade: "",
+        belongTo: "",
+        portfolioURL: "",
+      });
+      clickCloseButtonHandler();
+      setIsDisabled(false);
+      window.location.reload();
     });
   };
 
@@ -61,6 +72,12 @@ const ModalWindow = ({ className, isShow }) => {
     });
   };
 
+  const clickCloseButtonHandler = () => {
+    setIsClose(true);
+    setIsShow(false);
+    setIsClose(false);
+  };
+
   return (
     <StyledModalWindow className={className} isShow={isShow} isClose={isClose}>
       <Overlay />
@@ -68,11 +85,7 @@ const ModalWindow = ({ className, isShow }) => {
       <ContentWrapper>
         {/* <h1>投稿フォーム</h1> */}
         {!isClose && (
-          <CloseButton
-            onClick={() => {
-              setIsClose(!isClose);
-            }}
-          ></CloseButton>
+          <CloseButton onClick={clickCloseButtonHandler}></CloseButton>
         )}
         <Content>
           <form onSubmit={handleSubmit} autoComplete="off">
@@ -132,11 +145,11 @@ const ModalWindow = ({ className, isShow }) => {
               </select>
             </div>
             <div>
-              <input type="file" onChange={handleFile} />
+              <input type="file" onChange={handleFile} required />
               <UploadedImageContainer>
                 {!state.iconURL && (
                   <SuggestToSelectImage>
-                    <p>画像選択よろ</p>
+                    <p>画像選択したら、ここが変わるよ</p>
                   </SuggestToSelectImage>
                 )}
                 {state.iconURL && (
@@ -145,7 +158,9 @@ const ModalWindow = ({ className, isShow }) => {
               </UploadedImageContainer>
             </div>
             <div>
-              <input type="submit" value="投稿する" />
+              {/* <button disabled={isDisabled}>x */}
+              <input type="submit" value="投稿する" disabled={isDisabled} />
+              {/* </button> */}
             </div>
           </form>
         </Content>

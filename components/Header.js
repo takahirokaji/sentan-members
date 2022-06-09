@@ -7,18 +7,22 @@ import ModalWindow from "./ModalWindow";
 
 const Header = () => {
   const [isShow, setIsShow] = useState(false);
-  // const [modalwindowIsShown, setModalwindowIsShown] = useState(false);
-  // const [showModal, setShowModal] = useState(false);
+  const [isClose, setIsClose] = useState(false);
 
   return (
     <StyledHeader>
-      <Image src={Logo} alt="app_logo" width={250} height={100}></Image>
+      <Image src={Logo} alt="app_logo" width={200} height={90}></Image>
       <Spacer>
         <PageList>
           <li className="selected">Members</li>
         </PageList>
       </Spacer>
-      <ModalWindow isShow={isShow}></ModalWindow>
+      <ModalWindow
+        isShow={isShow}
+        isClose={isClose}
+        setIsClose={setIsClose}
+        setIsShow={setIsShow}
+      ></ModalWindow>
       <AddMemberButton onClick={() => setIsShow(true)}>
         ＋ メンバー追加
       </AddMemberButton>

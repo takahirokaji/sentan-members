@@ -2,10 +2,12 @@ import Head from "next/head";
 import MembersList from "../components/MembersList";
 import { collection, getDocs, query, orderBy } from "firebase/firestore";
 import { db } from "../Firebase/firebase";
+import { useEffect } from "react";
 
 export default function Home(props) {
   const gradeList = ["M2", "M1", "B4", "B3", "B2", "B1"];
   const members = props.members;
+  useEffect(() => {});
   return (
     <>
       <Head>
